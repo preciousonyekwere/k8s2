@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+ name: my-daemon
+spec:
+# replicas: 7
+ template:
+  metadata:
+   labels:
+    app: my-daemon
+  spec:
+   containers:
+   - name: nginx
+     image: nginx:1.22
+     ports:
+     - containerPort: 80
+     resources:
+      limits:
+       cpu: 100m
+       memory: 500Mi
+ selector:
+  matchLabels:
+   app: my-daemon
