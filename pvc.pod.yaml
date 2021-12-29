@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+ name: pvc-pod
+spec:
+ containers:
+ - name: rnd
+   image: alpine
+   command: ["/bin/sh","-c","shuf -n 1 -i 0-1000 >> /opt/number.out && sleep 200"]
+   volumeMounts:
+   - name: number-storage
+     mountPath: /opt
+ volumes:
+ - name: number-storage
+   persistentVolumeClaim:
+    claimName: pvc1   
+
